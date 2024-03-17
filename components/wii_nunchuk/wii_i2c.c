@@ -42,7 +42,7 @@ static esp_err_t wii_i2c_write(const uint8_t *data, size_t len)
   i2c_master_write_byte(cmd, (WII_I2C_ADDR << 1) | I2C_MASTER_WRITE, true);
   i2c_master_write(cmd, (uint8_t *)data, len, true);
   i2c_master_stop(cmd);
-  esp_err_t ret = i2c_master_cmd_begin(wii_i2c_port_num, cmd, 1000 / portTICK_RATE_MS);
+  esp_err_t ret = i2c_master_cmd_begin(wii_i2c_port_num, cmd, pdMS_TO_TICKS(1000));
   i2c_cmd_link_delete(cmd);
   return ret;
 }
@@ -57,7 +57,7 @@ static esp_err_t wii_i2c_read(uint8_t *data, size_t len)
   }
   i2c_master_read_byte(cmd, data + len - 1, I2C_MASTER_NACK);
   i2c_master_stop(cmd);
-  esp_err_t ret = i2c_master_cmd_begin(wii_i2c_port_num, cmd, 1000 / portTICK_RATE_MS);
+  esp_err_t ret = i2c_master_cmd_begin(wii_i2c_port_num, cmd, pdMS_TO_TICKS(1000));
   i2c_cmd_link_delete(cmd);
   return ret;
 }
