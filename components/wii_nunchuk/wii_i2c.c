@@ -65,8 +65,8 @@ static esp_err_t wii_i2c_read(uint8_t *data, size_t len)
 int wii_i2c_init(int i2c_port_num, int sda_pin, int scl_pin)
 {
   if (wii_i2c_setup_i2c(i2c_port_num, sda_pin, scl_pin) != ESP_OK) return 1;
-  if (wii_i2c_write(data_init1, sizeof(data_init1)) != ESP_OK) return 1;
-  if (wii_i2c_write(data_init2, sizeof(data_init2)) != ESP_OK) return 1;
+  if (wii_i2c_write(data_init1, sizeof(data_init1)) != ESP_OK) return 2;
+  if (wii_i2c_write(data_init2, sizeof(data_init2)) != ESP_OK) return 3;
   return 0;
 }
 
